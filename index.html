@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amino acid sequences - Various Species</title>
+    <style>
+        body {
+            font-family: 'Calibri', sans-serif;
+            margin: 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .grid-item {
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            font-size: 14px;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        .hotkey {
+            font-weight: bold;
+        }
+
+        #grid-item-18 {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #grid-item-18 h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #hidden-textarea {
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        .fasta-link-button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Amino acid sequences within the ACE2 peptide active site- Various Species</h1>
+
+    <div class="grid-container" id="grid-container">
+        <!-- Grid items will be dynamically added here -->
+    </div>
+
+    <!-- FASTA search button -->
+    <button class="fasta-link-button" onclick="window.open('https://www.genome.jp/tools/fasta/', '_blank');">FASTA Search</button>
+
+    <script>
+        const gridItemTexts = [
+            "TFLDKFNHEAEDLFYQ",
+            "EFLETFNKEAEEISYQ",
+            "TFLDKFNQEAEDLSYQ",
+            "TFLDKFNHEAEDLFYQ",
+            "TFLEKFNHEAEELSYQ",
+            "TFLEKFNLEAEDLAYQ",
+            "TFLEKFNSEAEELSHQ",
+            "TFLEKFNHEAEDLSYQ",
+            "TFLEKFNHEAEDLSYQ",
+            "TFLKEFNHEAEDRSYQ",
+            "My audience is the general Australian public. ",
+            "That's good, but would you please make these changes: ",
+            "That's far from what I would have liked you to produce.  Please ask 4 questions before regenerating your response to my previous prompt, so that we can get a better result. ",
+            "Provide me with some suggestions to explain this process/idea for people who are struggling with understanding it. ",
+            "Provide a suggested follow-up for what we should do after we complete this task. ",
+            "I would like to come up with ideas for an approach to solve this problem. Please keep in mind that we have access to almost limitless money, but not a lot of time. ",
+            "Can you suggest how we could make a physical model or visual diagram to assist with explaining this idea? ",
+        ];
+
+        const keyMap = {
+            'Digit1': 1,
+            'Digit2': 2,
+            'Digit3': 3,
+            'Digit4': 4,
+            'Digit5': 5,
+            'Digit6': 6,
+            'Digit7': 7,
+            'Digit8': 8,
+            'Digit9': 9,
+            'KeyQ': 10,
+            'KeyW': 11,
+            'KeyE': 12,
+            'KeyR': 13,
+            'KeyT': 14,
+            'KeyY': 15,
+            'KeyU': 16,
+            'KeyI': 17,
+        };
+
+        const hotkeys = ['Human', 'Wombat', 'Hamster', 'Rhesus macaque monkey', 'Cheetah', 'Pig', 'Horse', 'Cow', 'Sheep', 'Llama'];
+
+        const validHotkeys = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9'];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const gridContainer = document.getElementById('grid-container');
+
+            for (let i = 0; i < hotkeys.length; i++) {
+                const gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+                gridItem.id = `grid-item-${i + 1}`;
+
+                const title = hotkeys[i].replace(/ /g, '_');
+                const fastaText = `>${title}\n${gridItemTexts[i]}`;
+
+                const paragraph = document.createElement('p');
+                paragraph.innerText = fastaText;
+
+                const button = document.createElement('button');
+                button.innerText = 'Copy text';
+                button.onclick = createCopyHandler(fastaText);
+
+                gridItem.appendChild(paragraph);
+                gridItem.appendChild(button);
+                gridContainer.appendChild(gridItem);
+            }
+
+            const gridItem18 = document.createElement('div');
+            gridItem18.className = 'grid-item';
+            gridItem18.id = 'grid-item-18';
+
+            const heading18 = document.createElement('h2');
+            heading18.innerText = 'Click "Copy text" to add the FASTA sequence to your clipboard';
+
+            const textarea18 = document.createElement('textarea');
+            textarea18.id = 'hidden-textarea';
+            textarea18.className = 'hidden-textarea';
+
+            gridItem18.appendChild(heading18);
+            gridItem18.appendChild(textarea18);
+            gridContainer.appendChild(gridItem18);
+        });
+
+        function createCopyHandler(text) {
+            return function(event) {
+                if (event.metaKey || event.ctrlKey) {
+                    appendHiddenTextArea(text);
+                } else {
+                    copyToClipboard(text);
+                }
+            };
+        }
+
+        function appendHiddenTextArea(text) {
+            const textarea = document.getElementById('hidden-textarea');
+            textarea.value += text + '\n';
+            textarea.select();
+            document.execCommand('copy');
+        }
+
+        function copyToClipboard(text) {
+            const textarea = document.getElementById('hidden-textarea');
+            textarea.value = text;
+            textarea.select();
+            document.execCommand('copy');
+        }
+
+        function clearHiddenTextArea() {
+            const textarea = document.getElementById('hidden-textarea');
+            textarea.value = '';
+        }
+
+        document.addEventListener('keydown', function (event) {
+            const key = event.code;
+
+            if (validHotkeys.includes(key)) {
+                const gridItem = document.getElementById(`grid-item-${keyMap[key]}`);
+                if (gridItem) {
+                    const text = gridItem.querySelector('p').innerText.split('. ')[1];
+                    copyToClipboard(text);
+                    event.preventDefault();
+                }
+            } else if (!event.ctrlKey && !event.metaKey && !event.altKey && !event.shiftKey) {
+                clearHiddenTextArea();
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
