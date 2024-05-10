@@ -27,10 +27,6 @@
             cursor: pointer;
         }
 
-        .hotkey {
-            font-weight: bold;
-        }
-
         #grid-item-18 {
             text-align: center;
             display: flex;
@@ -84,14 +80,7 @@
             "TFLEKFNSEAEELSHQ",
             "TFLEKFNHEAEDLSYQ",
             "TFLEKFNHEAEDLSYQ",
-            "TFLKEFNHEAEDRSYQ",
-            "My audience is the general Australian public. ",
-            "That's good, but would you please make these changes: ",
-            "That's far from what I would have liked you to produce.  Please ask 4 questions before regenerating your response to my previous prompt, so that we can get a better result. ",
-            "Provide me with some suggestions to explain this process/idea for people who are struggling with understanding it. ",
-            "Provide a suggested follow-up for what we should do after we complete this task. ",
-            "I would like to come up with ideas for an approach to solve this problem. Please keep in mind that we have access to almost limitless money, but not a lot of time. ",
-            "Can you suggest how we could make a physical model or visual diagram to assist with explaining this idea? ",
+            "TFLKEFNHEAEDRSYQ"
         ];
 
         const keyMap = {
@@ -116,8 +105,6 @@
 
         const hotkeys = ['Human', 'Wombat', 'Hamster', 'Rhesus macaque monkey', 'Cheetah', 'Pig', 'Horse', 'Cow', 'Sheep', 'Llama'];
 
-        const validHotkeys = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9'];
-
         document.addEventListener('DOMContentLoaded', function() {
             const gridContainer = document.getElementById('grid-container');
 
@@ -134,7 +121,7 @@
 
                 const button = document.createElement('button');
                 button.innerText = 'Copy text';
-                button.onclick = createCopyHandler(fastaText);
+                button.onclick = function() { appendHiddenTextArea(fastaText); };
 
                 gridItem.appendChild(paragraph);
                 gridItem.appendChild(button);
@@ -146,37 +133,26 @@
             gridItem18.id = 'grid-item-18';
 
             const heading18 = document.createElement('h2');
-            heading18.innerText = 'Click "Copy text" to add the FASTA sequence to your clipboard';
+            heading18.innerText = 'Text copied to clipboard';
 
             const textarea18 = document.createElement('textarea');
             textarea18.id = 'hidden-textarea';
             textarea18.className = 'hidden-textarea';
+            textarea18.style.height = '100px'; // Set the height
+
+            const clearButton = document.createElement('button');
+            clearButton.innerText = 'Clear clipboard';
+            clearButton.onclick = clearHiddenTextArea;
 
             gridItem18.appendChild(heading18);
             gridItem18.appendChild(textarea18);
+            gridItem18.appendChild(clearButton);
             gridContainer.appendChild(gridItem18);
         });
 
-        function createCopyHandler(text) {
-            return function(event) {
-                if (event.metaKey || event.ctrlKey) {
-                    appendHiddenTextArea(text);
-                } else {
-                    copyToClipboard(text);
-                }
-            };
-        }
-
         function appendHiddenTextArea(text) {
             const textarea = document.getElementById('hidden-textarea');
-            textarea.value += text + '\n';
-            textarea.select();
-            document.execCommand('copy');
-        }
-
-        function copyToClipboard(text) {
-            const textarea = document.getElementById('hidden-textarea');
-            textarea.value = text;
+            textarea.value += text + '\n\n'; // Append with two new lines for better readability
             textarea.select();
             document.execCommand('copy');
         }
@@ -185,22 +161,6 @@
             const textarea = document.getElementById('hidden-textarea');
             textarea.value = '';
         }
-
-        document.addEventListener('keydown', function (event) {
-            const key = event.code;
-
-            if (validHotkeys.includes(key)) {
-                const gridItem = document.getElementById(`grid-item-${keyMap[key]}`);
-                if (gridItem) {
-                    const text = gridItem.querySelector('p').innerText.split('. ')[1];
-                    copyToClipboard(text);
-                    event.preventDefault();
-                }
-            } else if (!event.ctrlKey && !event.metaKey && !event.altKey && !event.shiftKey) {
-                clearHiddenTextArea();
-                event.preventDefault();
-            }
-        });
     </script>
 </body>
 </html>
