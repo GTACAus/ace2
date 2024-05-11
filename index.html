@@ -58,48 +58,119 @@
     <button class="fasta-link-button" onclick="window.open('https://www.genome.jp/tools-bin/clustalw', '_blank');">FASTA Search</button>
     <script>
         const gridItemTexts = [
-            "TFLDKFNHEAEDLFYQ", "EFLETFNKEAEEISYQ", "TFLDKFNQEAEDLSYQ", "TFLEKFNHEAEELSYQ",
-            "TFLEKFNLEAEDLAYQ", "TFLEKFNSEAEELSHQ", "TFLEKFNHEAEDLSYQ", "TFLKEFNHEAEDRSYQ",
-            "TFLEKFNQEAENLSYQ", "TFLLKFDHDAEDLSYQ", "TFLDTFNQEAEDLSYQ", "TFLEKFNQEAENLSYQ",
-            "TFLEKFNSEAEELSYQ", "TFLDTFNQEAEDLSYQ", "TFLNKFNQEAEDLSYQ", "SFLNKFNQEAEDLSYQ",
-            "TFLEKFNHEAEELSYQ", "TFLEKFNYEAEELSYQ", "TFLEKFNYEAEELSYQ", "TFLEKFNYEAEDLYYQ",
-            "TFLEKFNTEAEDLFYQ", "KFLNDFNSEAENLTYQ", "TFLEKFNTEVEDLFYQ", "TFLEKFNTEVEDLFYQ",
-            "TFLEKFNTEVEDLFYQ", "TFLEKFNTEAEDLFYQ", "TFLDEFNSEAENLSYQ", "EFLDKFNTEAEDLSHL",
-            "IFLENFNSKAEDLSHE", "IFLQNFNSQAEDLSHE", "IFLENFNSEAEDLSHE", "EFLDKFNSKAENLSHE",
-            "KFLEGFNSQAEDLSFE", "TFLEKFNSEVEVLSFE", "TFLEKFNTEAEELYYE", "TFLENFNTEAEEWFYQ",
-            "TFLQKFDREAEDLSYQ", "TFLQKFDHEAEDLSYQ", "TFLEKFNHEAEDLSYQ", "TFLQKFDHEAEDLSYQ",
-            "TFLEEFNHEAEDLSYQ", "TFLDKFNHEAEDLFYQ", "TFLDKFNHEAEDLFYQ", "TFLDKFNHEAEDLFYQ",
-            "TFLDKFNHEAEDLFYQ", "TFLDKFNHEAEDLFYQ", "TFLEKFNSEAEELSYQ", "KFLEKFNYEAEELSYQ",
-            "TFLEKFNHEAEDLSYQ", "TFLEKFNHEAEDLSYQ", "TFLEKFNSEAEELSHQ", "TFLEKFNHEAEDLSYQ",
-            "TFLETFNQQAEELSHQ", "TFLENFNHEAEDLSYQ", "AFLEQFNQQAEDLSYQ", "DFLEKFNNEAEERYHQ",
-            "TFLDEFNLKAEDLYYQ", "TFLEKFNLEAEDLSYQ", "TFLEKFNHEAEDLSYQ", "TFLEKFNHEAEDLSYQ",
-            "QFLTQFNKQAEDLSYQ", "KFLTQFNQQAEDLSHE", "EFLEKFNEEAEEIYYQ", "TFLDNFNQEAEDLSYQ",
-            "TFLEKFNYEAEELSYQ", "TFLEKFNYEAEELSYQ", "TFLDEFNQKAEDLYYQ", "KFLDDFNRQAENVSYE",
-            "KFLDNFNKQVEDLSYN", "TFLDKFNQEAEDLDYQ", "TFLEKFNHEAEDLSYQ", "TFLEKFNSEAEELSYQ",
-            "AFLDNFNKAAEDVSYQ", "TFLEKFNYEAEDLYYQ", "TFLEKFNYEAEELSYQ", "GFLENFTKAAEDVSYQ",
-            "TFLEKFNYEAEDLYYQ", "TFLEKFNHEAEELSYQ", "EFLETFNKEAEEISYQ"
-        ];
+    "TFLDKFNHEAEDLFYQ", // Human
+    "EFLETFNKEAEEISYQ", // Wombat
+    "TFLDKFNQEAEDLSYQ", // Hamster
+    "TFLDKFNHEAEDLFYQ", // Rhesus macaque monkey
+    "TFLEKFNHEAEELSYQ", // Cheetah
+    "TFLEKFNLEAEDLAYQ", // Pig
+    "TFLEKFNSEAEELSHQ", // Horse
+    "TFLEKFNHEAEDLSYQ", // Cow
+    "TFLEKFNHEAEDLSYQ", // Sheep
+    "TFLKEFNHEAEDRSYQ", // Llama
+    "TFLEKFNQEAENLSYQ", // White rhinoceros
+    "TFLLKFDHDAEDLSYQ", // Hippopotamus
+    "TFLDTFNQEAEDLSYQ", // West Indian manatee
+    "TFLEKFNQEAENLSYQ", // Aardvark
+    "TFLEKFNSEAEELSYQ", // Chinese pangolin
+    "TFLEKFNSEAEELSYQ", // Sunda pangolin
+    "TFLDTFNQEAEDLSYQ", // African elephant
+    "TFLNKFNQEAEDLSYQ", // Mouse
+    "SFLNKFNQEAEDLSYQ", // Rat
+    "TFLEKFNHEAEELSYQ", // Cat
+    "TFLEKFNYEAEELSYQ", // Dingo
+    "TFLEKFNYEAEELSYQ", // Dog
+    "TFLEKFNYEAEDLYYQ", // Grizzly bear
+    "TFLEKFNHEAEELSYQ", // Jaguar
+    "TFLEKFNHEAEELSYQ", // Snow leopard
+    "TFLEKFNTEAEDLFYQ", // Greater horseshoe bat
+    "KFLNDFNSEAENLTYQ", // Japanese horseshoe bat
+    "TFLEKFNTEVEDLFYQ", // Short-nosed fruit bat
+    "TFLEKFNTEVEDLFYQ", // Naked backed fruit bat
+    "TFLEKFNTEVEDLFYQ", // Black flying fox
+    "TFLEKFNTEVEDLFYQ", // Large flying fox
+    "TFLEKFNTEAEDLFYQ", // Epauletted fruit bat
+    "TFLDEFNSEAENLSYQ", // Rufous horseshoe bat
+    "EFLDKFNTEAEDLSHL", // Great roundleaf bat
+    "IFLENFNSKAEDLSHE", // Riparian myotis bat
+    "IFLQNFNSQAEDLSHE", // Clear winged woolly bat
+    "IFLENFNSEAEDLSHE", // Big brown bat
+    "EFLDKFNSKAENLSHE", // Kuhl’s pipistrelle
+    "KFLEGFNSQAEDLSFE", // Natal long-fingered bat
+    "TFLEKFNSEVEVLSFE", // Black-bearded tomb bat
+    "TFLEKFNTEAEELYYE", // Greater broad-nosed bat
+    "TFLENFNTEAEEWFYQ", // Vampire bat
+    "TFLQKFDREAEDLSYQ", // Dolphin
+    "TFLQKFDREAEDLSYQ", // Orca
+    "TFLQKFDHEAEDLSYQ", // Atlantic right whale
+    "TFLQKFDHEAEDLSYQ", // Blue whale
+    "TFLEKFNHEAEDLSYQ", // Goat
+    "TFLEKFNQEAEDLSYQ", // Rabbit
+    "TFLQKFDHEAEDLSYQ", // Pygmy sperm whale
+    "TFLEEFNHEAEDLSYQ", // Camel
+    "TFLDKFNHEAEDLFYQ", // Common chimpanzee
+    "TFLDKFNHEAEDLFYQ", // Gorilla
+    "TFLDKFNHEAEDLFYQ", // Sumatran orangutan
+    "TFLDKFNHEAEDLFYQ", // Olive baboon
+    "TFLDKFNHEAEDLFYQ", // Mandrill
+    "TFLEKFNHEAEDLSYQ", // Vervet monkey
+    "TFLEKFNHEAEDLSYQ", // Northern fur seal
+    "TFLEKFNSEAEELSHQ", // Elephant seal
+    "TFLEKFNHEAEDLSYQ", // Water buffalo
+    "TFLETFNQQAEELSHQ", // Wild yak
+    "TFLENFNHEAEDLSYQ", // Zebra
+    "TFLEKFNHEAEDLSYQ", // American bison
+    "TFLETFNQQAEELSHQ", // Armadillo
+    "TFLENFNHEAEDLSYQ", // Red deer
+    "AFLEQFNQQAEDLSYQ", // Cape elephant shrew
+    "DFLEKFNNEAEERYHQ", // Colocolo opossum
+    "TFLDEFNLKAEDLYYQ", // Guinea pig
+    "TFLEKFNLEAEDLSYQ", // Wart hog
+    "TFLEKFNHEAEELSYQ", // Lynx
+    "TFLEKFNHEAEDLSYQ", // Dama gazelle
+    "TFLEKFNHEAEDLSYQ", // Musk deer
+    "QFLTQFNKQAEDLSYQ", // Platypus
+    "KFLTQFNQQAEDLSHE", // Echidna
+    "EFLEKFNEEAEEIYYQ", // Brushtail possum
+    "TFLDNFNQEAEDLSYQ", // Kangaroo rat
+    "TFLEKFNYEAEELSYQ", // Raccoon dog
+    "TFLEKFNYEAEELSYQ", // American mink
+    "TFLDEFNQKAEDLYYQ", // Mongolian gerbil
+    "KFLDDFNRQAENVSYE", // European hedgehog
+    "KFLDNFNKQVEDLSYN", // Smoky shrew
+    "TFLDKFNQEAEDLDYQ", // Ground hog
+    "TFLEKFNSEAEELSYQ", // Chinese pangolin
+    "AFLDNFNKAAEDVSYQ", // Yellow-footed antechinus
+    "TFLEKFNYEAEDLYYQ", // Giant panda
+    "TFLEKFNYEAEELSYQ", // European mink
+    "GFLENFTKAAEDVSYQ", // Tasmanian devil
+    "TFLEKFNYEAEDLYYQ", // Giant panda
+    "TFLEKFNHEAEELSYQ", // Tiger
+    "EFLETFNKEAEEISYQ"  // Koala
+];
+
 
         const hotkeys = [
-            "Human", "Wombat", "Hamster", "Cheetah", "Pig", "Horse", "Cow", "Llama",
-            "White_rhinoceros", "Hippopotamus", "West_Indian_manatee", "Aardvark",
-            "Chinese_pangolin", "Sunda_pangolin", "African_elephant", "Mouse", "Rat",
-            "Cat", "Dingo", "Dog", "Grizzly_bear", "Greater_horseshoe_bat",
-            "Japanese_horseshoe_bat", "Short-nosed_fruit_bat", "Naked_backed_fruit_bat",
-            "Black_flying_fox", "Large_flying_fox", "Epauletted_fruit_bat",
-            "Rufous_horseshoe_bat", "Great_roundleaf_bat", "Riparian_myotis_bat",
-            "Clear_winged_woolly_bat", "Big_brown_bat", "Kuhl’s_pipistrelle",
-            "Natal_long-fingered_bat", "Black-bearded_tomb_bat", "Greater_broad-nosed_bat",
-            "Vampire_bat", "Dolphin", "Orca", "Goat", "Pygmy_sperm_whale", "Camel",
-            "Common_chimpanzee", "Gorilla", "Sumatran_orangutan", "Olive_baboon", "Mandrill",
-            "Vervet_monkey", "Northern_fur_seal", "Elephant_seal", "Water_buffalo", "Wild_yak",
-            "Zebra", "American_bison", "Armadillo", "Red_deer", "Cape_elephant_shrew",
-            "Colocolo_¬opossum", "Guinea_pig", "Wart_hog", "Lynx", "Dama_gazelle", "Musk_deer",
-            "Platypus", "Echidna", "Brushtail_possum", "Kangaroo_rat", "Raccoon_dog",
-            "American_mink", "Mongolian_gerbil", "European_hedgehog", "Smoky_shrew", "Ground_hog",
-            "Chinese_pangolin", "Yellow-footed_antechinus", "Giant_panda", "European_mink",
-            "Tasmanian_devil", "Giant_panda", "Tiger", "Koala"
-        ];
+    "Human", "Wombat", "Hamster", "Rhesus_macaque_monkey", "Cheetah", "Pig", "Horse", 
+    "Cow", "Sheep", "Llama", "White_rhinoceros", "Hippopotamus", "West_Indian_manatee", 
+    "Aardvark", "Chinese_pangolin", "Sunda_pangolin", "African_elephant", "Mouse", 
+    "Rat", "Cat", "Dingo", "Dog", "Grizzly_bear", "Jaguar", "Snow_leopard", 
+    "Greater_horseshoe_bat", "Japanese_horseshoe_bat", "Short_nosed_fruit_bat", 
+    "Naked_backed_fruit_bat", "Black_flying_fox", "Large_flying_fox", "Epauletted_fruit_bat", 
+    "Rufous_horseshoe_bat", "Great_roundleaf_bat", "Riparian_myotis_bat", "Clear_winged_woolly_bat", 
+    "Big_brown_bat", "Kuhl’s_pipistrelle", "Natal_long_fingered_bat", "Black_bearded_tomb_bat", 
+    "Greater_broad_nosed_bat", "Vampire_bat", "Dolphin", "Orca", "Atlantic_right_whale", 
+    "Blue_whale", "Goat", "Rabbit", "Pygmy_sperm_whale", "Camel", "Common_chimpanzee", 
+    "Gorilla", "Sumatran_orangutan", "Olive_baboon", "Mandrill", "Vervet_monkey", 
+    "Northern_fur_seal", "Elephant_seal", "Water_buffalo", "Wild_yak", "Zebra", 
+    "American_bison", "Armadillo", "Red_deer", "Cape_elephant_shrew", "Colocolo_opossum", 
+    "Guinea_pig", "Wart_hog", "Lynx", "Dama_gazelle", "Musk_deer", "Platypus", 
+    "Echidna", "Brushtail_possum", "Kangaroo_rat", "Raccoon_dog", "American_mink", 
+    "Mongolian_gerbil", "European_hedgehog", "Smoky_shrew", "Ground_hog", "Chinese_pangolin", 
+    "Yellow_footed_antechinus", "Giant_panda", "European_mink", "Tasmanian_devil", "Giant_panda", 
+    "Tiger", "Koala"
+];
+
 
         document.addEventListener('DOMContentLoaded', function() {
             const gridContainer = document.getElementById('grid-container');
